@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { MoonIcon, SunIcon, SearchIcon, Menu, X, Home, FileText, Image as ImageIcon, Wrench, Lightbulb } from 'lucide-react';
+import { MoonIcon, SunIcon, Menu, X, Home, FileText, Image as ImageIcon, Wrench, Lightbulb } from 'lucide-react';
 import ContentArea from './components/ContentArea';
 import SearchBar from './components/SearchBar';
 import WelcomeScreen from './components/WelcomeScreen';
