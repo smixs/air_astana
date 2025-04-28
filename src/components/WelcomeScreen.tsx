@@ -22,7 +22,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
       `}
       >
         <h1 className="text-3xl font-bold mb-6">
-          <span>Блокнотик Знаний</span>
+          <span>Блокнот Знаний</span>
           <span className="text-blue-500"> AIMasters</span>
         </h1>
 

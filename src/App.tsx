@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-import { MoonIcon, SunIcon, SearchIcon } from 'lucide-react';
-import Sidebar from './components/Sidebar';
+import { MoonIcon, SunIcon, SearchIcon, Menu, X, Home, FileText, Image as ImageIcon, Wrench, Lightbulb } from 'lucide-react';
 import ContentArea from './components/ContentArea';
 import SearchBar from './components/SearchBar';
 import WelcomeScreen from './components/WelcomeScreen';
@@ -10,7 +9,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('welcome');
   const [searchQuery, setSearchQuery] = useState('');
   const [darkMode, setDarkMode] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const mainContentRef = useRef<HTMLElement>(null);
 
@@ -25,15 +24,12 @@ function App() {
         <div className="flex items-center">
           <button 
             className="mr-4 md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
+            {isMobileNavOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <h1 className="text-xl md:text-2xl font-bold">
-            <span className="text-blue-500">🧠 </span>
-            <span className="">Блокнот Знаний</span>
+            <span>Блокнот Знаний</span>
             <span className="text-blue-500"> AIMasters</span>
           </h1>
         </div>
@@ -51,6 +47,52 @@ function App() {
           >
             {darkMode ? <SunIcon size={20} /> : <MoonIcon size={20} />}
           </button>
+          <button
+            onClick={() => setActiveSection('welcome')}
+            title="Главная"
+            className={`p-2 rounded-full ml-4 ${activeSection === 'welcome' ? (darkMode ? 'bg-gray-700' : 'bg-gray-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
+          >
+            <Home size={20} className={`${activeSection === 'welcome' ? (darkMode ? 'text-blue-400' : 'text-blue-600') : ''}`} />
+          </button>
+          <div className="hidden md:flex items-center gap-1 ml-4">
+            {sections.map((section) => {
+              if (section.id === 'welcome') return null;
+
+              let IconComponent;
+              let iconColorClass;
+              switch (section.id) {
+                case 'text-models':
+                  IconComponent = FileText;
+                  iconColorClass = darkMode ? 'text-blue-400' : 'text-blue-600';
+                  break;
+                case 'visual-models':
+                  IconComponent = ImageIcon;
+                  iconColorClass = darkMode ? 'text-purple-400' : 'text-purple-600';
+                  break;
+                case 'utilities':
+                  IconComponent = Wrench;
+                  iconColorClass = darkMode ? 'text-green-400' : 'text-green-600';
+                  break;
+                case 'concepts':
+                  IconComponent = Lightbulb;
+                  iconColorClass = darkMode ? 'text-amber-400' : 'text-amber-600';
+                  break;
+                default:
+                  return null;
+              }
+
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  title={section.title}
+                  className={`p-2 rounded-full transition-colors ${activeSection === section.id ? (darkMode ? 'bg-gray-700' : 'bg-gray-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
+                >
+                  <IconComponent size={20} className={`${iconColorClass}`} />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </header>
 
@@ -61,45 +103,43 @@ function App() {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row">
-        {/* Mobile Sidebar */}
-        <div 
-          className={`
-            fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden transition-opacity duration-300
-            ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-          `}
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          <div 
-            className={`w-64 h-full ${darkMode ? 'bg-gray-800' : 'bg-white'} transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Sidebar 
-              sections={sections}
-              activeSection={activeSection} 
-              setActiveSection={(section) => {
-                setActiveSection(section);
-                setIsMobileMenuOpen(false);
-                mainContentRef.current?.scrollTo(0, 0);
-              }}
-              darkMode={darkMode}
-            />
+      {/* Мобильная навигация (выпадающая) */}
+      {isMobileNavOpen && (
+        <nav className={`md:hidden border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} shadow-md`}>
+          <div className="px-4 py-3 space-y-2">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => {
+                  setActiveSection(section.id);
+                  setIsMobileNavOpen(false);
+                  mainContentRef.current?.scrollTo(0, 0);
+                }}
+                className={`
+                  block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2
+                  ${activeSection === section.id 
+                    ? (darkMode ? 'bg-blue-900 text-white' : 'bg-blue-100 text-blue-700') 
+                    : (darkMode ? 'text-gray-300 hover:bg-gray-700 hover:text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900')}
+                `}
+              >
+                {section.id === 'welcome' && <Home size={18} />}
+                {section.title}
+              </button>
+            ))}
           </div>
-        </div>
+        </nav>
+      )}
 
-        {/* Desktop Sidebar */}
-        <div className={`hidden md:block w-64 p-4 sticky top-[73px] self-start overflow-y-auto max-h-[calc(100vh-73px)] ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-          <Sidebar 
-            sections={sections} 
-            activeSection={activeSection} 
-            setActiveSection={setActiveSection}
-            darkMode={darkMode}
-          />
-        </div>
+      {/* Десктопная навигация */}
+      {/* 
+        <div className={`hidden md:block w-64 p-4 ...`}>
+          Раньше здесь был Sidebar 
+        </div> 
+      */}
 
-        {/* Main Content */}
-        <main ref={mainContentRef} className="flex-1 p-4 md:p-8 overflow-y-auto">
-          {/* Render ContentArea only if not welcome screen or if searching */}
+        {/* Main Content - теперь занимает всю ширину под хедером */}
+        <main ref={mainContentRef} className="p-4 md:p-8 overflow-y-auto">
+          {/* Логика рендера ContentArea и WelcomeScreen остается прежней */}
           {(activeSection !== 'welcome' || searchQuery) && (
             <ContentArea 
               sections={sections}
@@ -108,12 +148,12 @@ function App() {
               darkMode={darkMode}
             />
           )}
-          {/* Render WelcomeScreen only if welcome screen and not searching */}
           {activeSection === 'welcome' && !searchQuery && (
              <WelcomeScreen darkMode={darkMode} setActiveSection={setActiveSection} />
            )}
         </main>
-      </div>
+      {/* Убираем закрывающий тег от flex-col md:flex-row */}
+      {/* </div> */} 
 
       {/* Footer */}
       <footer className={`py-4 px-6 text-center text-sm ${darkMode ? 'bg-gray-800 text-gray-400' : 'bg-white text-gray-600'}`}>
