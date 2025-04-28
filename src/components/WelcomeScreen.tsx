@@ -6,6 +6,7 @@ import {
   Lightbulb,
   PlayCircle
 } from 'lucide-react';
+import { AnimatedText } from '@/components/ui/animated-text';
 
 interface WelcomeScreenProps {
   darkMode: boolean;
@@ -21,13 +22,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
         ${darkMode ? 'bg-gray-800' : 'bg-white border border-gray-200'}
       `}
       >
-        <h1 className="text-3xl font-bold mb-6">
-          <span>Блокнот Знаний</span>
-          <span className="text-blue-500"> AIMasters</span>
-        </h1>
+        <AnimatedText 
+          text="Блокнот Знаний AIMasters" 
+          className="mb-6"
+          textClassName="text-3xl font-bold text-blue-500"
+          underlineClassName="text-blue-500"
+        />
 
         <p className="text-lg mb-6">
-          Это ваш гид по миру нейросетей курса AIMasters.
+          Ваш гид по миру нейросетей курса AIMasters.
         </p>
 
         <div
