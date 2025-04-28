@@ -21,40 +21,28 @@ function App() {
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       {/* Header */}
       <header className={`py-4 px-6 md:px-8 flex justify-between items-center shadow-sm sticky top-0 z-10 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+        {/* Левая часть хедера: Бургер (моб) + Иконки Навигации (десктоп) */}
         <div className="flex items-center">
+          {/* Бургер (только мобильные) */}
           <button 
             className="mr-4 md:hidden"
             onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
           >
             {isMobileNavOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          <h1 className="text-xl md:text-2xl font-bold">
-            <span>Блокнот Знаний</span>
-            <span className="text-blue-500"> AIMasters</span>
-          </h1>
-        </div>
-        
-        <div className="flex items-center">
-          <div className="relative mr-4 hidden md:block">
-            <SearchBar 
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-            />
-          </div>
-          <button 
-            onClick={toggleDarkMode} 
-            className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'}`}
-          >
-            {darkMode ? <SunIcon size={20} /> : <MoonIcon size={20} />}
-          </button>
-          <button
-            onClick={() => setActiveSection('welcome')}
-            title="Главная"
-            className={`p-2 rounded-full ml-4 ${activeSection === 'welcome' ? (darkMode ? 'bg-gray-700' : 'bg-gray-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
-          >
-            <Home size={20} className={`${activeSection === 'welcome' ? (darkMode ? 'text-blue-400' : 'text-blue-600') : ''}`} />
-          </button>
-          <div className="hidden md:flex items-center gap-1 ml-4">
+
+          {/* Иконки разделов - только для десктопа - теперь слева */} 
+          <div className="hidden md:flex items-center gap-1">
+            {/* Иконка "Главная" */} 
+            <button
+              onClick={() => setActiveSection('welcome')}
+              title="Главная"
+              className={`p-2 rounded-full ${activeSection === 'welcome' ? (darkMode ? 'bg-gray-700' : 'bg-gray-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
+            >
+              <Home size={20} className={`${activeSection === 'welcome' ? (darkMode ? 'text-blue-400' : 'text-blue-600') : ''}`} />
+            </button>
+
+            {/* Остальные иконки разделов */} 
             {sections.map((section) => {
               if (section.id === 'welcome') return null;
 
@@ -93,6 +81,24 @@ function App() {
               );
             })}
           </div>
+        </div>
+        
+        {/* Правая часть хедера: Поиск и Тема */}
+        <div className="flex items-center gap-2">
+          {/* Поиск */} 
+          <div className="relative hidden md:block">
+            <SearchBar 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+          </div>
+          {/* Кнопка темы */} 
+          <button 
+            onClick={toggleDarkMode} 
+            className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'}`}
+          >
+            {darkMode ? <SunIcon size={20} /> : <MoonIcon size={20} />}
+          </button>
         </div>
       </header>
 
