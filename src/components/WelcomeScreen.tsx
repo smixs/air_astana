@@ -1,4 +1,10 @@
 import React from 'react';
+import { 
+  FileText,
+  Image as ImageIcon,
+  Wrench,
+  Lightbulb,
+} from 'lucide-react';
 
 interface WelcomeScreenProps {
   darkMode: boolean;
@@ -45,12 +51,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
           <div
             onClick={() => setActiveSection('text-models')}
             className={`
-            p-5 rounded-lg transition-transform duration-200 hover:scale-105 cursor-pointer
+            p-5 rounded-lg transition-transform transition-colors duration-200 hover:scale-105 cursor-pointer
             ${darkMode ? 'bg-blue-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-blue-50 hover:bg-blue-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2">📝 Текстовые Модели</h3>
-            <p>
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <FileText size={20} className="text-blue-500" /> 
+              Текстовые Модели
+            </h3>
+            <p className="text-sm ml-7">
               Ключевые LLM, особенности, платформы для доступа, и как выбрать
               лучшую для своих задач.
             </p>
@@ -59,12 +68,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
           <div
             onClick={() => setActiveSection('visual-models')}
             className={`
-            p-5 rounded-lg transition-transform duration-200 hover:scale-105 cursor-pointer
+            p-5 rounded-lg transition-transform transition-colors duration-200 hover:scale-105 cursor-pointer
             ${darkMode ? 'bg-purple-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-purple-50 hover:bg-purple-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2">🎨 Визуальные Модели</h3>
-            <p>
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <ImageIcon size={20} className="text-purple-500" />
+              Визуальные Модели
+            </h3>
+            <p className="text-sm ml-7">
               Генераторы изображений, видео, и инструменты для визуального
               творчества.
             </p>
@@ -73,12 +85,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
           <div
             onClick={() => setActiveSection('utilities')}
             className={`
-            p-5 rounded-lg transition-transform duration-200 hover:scale-105 cursor-pointer
+            p-5 rounded-lg transition-transform transition-colors duration-200 hover:scale-105 cursor-pointer
             ${darkMode ? 'bg-green-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-green-50 hover:bg-green-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2">🔧 Утилиты и Платформы</h3>
-            <p>
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <Wrench size={20} className="text-green-500" />
+              Утилиты и Платформы
+            </h3>
+            <p className="text-sm ml-7">
               Вспомогательные инструменты для работы с AI - транскрибация,
               озвучка, веб-публикация.
             </p>
@@ -87,12 +102,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
           <div
             onClick={() => setActiveSection('concepts')}
             className={`
-            p-5 rounded-lg transition-transform duration-200 hover:scale-105 cursor-pointer
+            p-5 rounded-lg transition-transform transition-colors duration-200 hover:scale-105 cursor-pointer
             ${darkMode ? 'bg-amber-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-amber-50 hover:bg-amber-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2">💡 Концепты и Техники</h3>
-            <p>
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <Lightbulb size={20} className="text-amber-500" />
+              Концепты и Техники
+            </h3>
+            <p className="text-sm ml-7">
               Базовые понятия и техники для эффективной работы с AI - системные
               промпты, RAG и другие.
             </p>
