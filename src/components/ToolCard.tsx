@@ -73,7 +73,10 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, darkMode }) => {
           : 'bg-white hover:bg-gray-50 border border-gray-200 hover:shadow-md'}
       `}
     >
-      <div className="p-5">
+      <div 
+        className="p-5 cursor-pointer"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
         <div className="flex justify-between items-start mb-3">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -89,12 +92,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, darkMode }) => {
             </div>
             <h3 className="text-lg font-bold">{tool.title}</h3>
           </div>
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`p-1 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-          >
-            {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-          </button>
+          {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
         </div>
         
         <p className="text-sm mb-3">{tool.description}</p>
