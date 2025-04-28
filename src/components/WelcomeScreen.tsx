@@ -4,6 +4,7 @@ import {
   Image as ImageIcon,
   Wrench,
   Lightbulb,
+  PlayCircle
 } from 'lucide-react';
 
 interface WelcomeScreenProps {
@@ -21,12 +22,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
       `}
       >
         <h1 className="text-3xl font-bold mb-6">
-          <span className="text-blue-500">🧠 </span>
-          <span>Блокнот Знаний</span>
+          <span>Блокнотик Знаний</span>
           <span className="text-blue-500"> AIMasters</span>
         </h1>
 
-        {/* Измененный текст здесь */}
         <p className="text-lg mb-6">
           Это ваш гид по миру нейросетей курса AIMasters. Мы
           собрали здесь ключевую информацию с трех занятий: обзор моделей,
@@ -55,11 +54,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
             ${darkMode ? 'bg-blue-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-blue-50 hover:bg-blue-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-              <FileText size={20} className="text-blue-500" /> 
+            <div className="mb-2">
+              <FileText size={24} className="text-blue-500" /> 
+            </div>
+            <h3 className="text-lg font-bold mb-2">
               Текстовые Модели
             </h3>
-            <p className="text-sm ml-7">
+            <p className="text-sm">
               Ключевые LLM, особенности, платформы для доступа, и как выбрать
               лучшую для своих задач.
             </p>
@@ -72,11 +73,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
             ${darkMode ? 'bg-purple-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-purple-50 hover:bg-purple-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-              <ImageIcon size={20} className="text-purple-500" />
+            <div className="mb-2">
+              <ImageIcon size={24} className="text-purple-500" />
+            </div>
+            <h3 className="text-lg font-bold mb-2">
               Визуальные Модели
             </h3>
-            <p className="text-sm ml-7">
+            <p className="text-sm">
               Генераторы изображений, видео, и инструменты для визуального
               творчества.
             </p>
@@ -89,11 +92,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
             ${darkMode ? 'bg-green-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-green-50 hover:bg-green-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-              <Wrench size={20} className="text-green-500" />
+            <div className="mb-2">
+              <Wrench size={24} className="text-green-500" />
+            </div>
+            <h3 className="text-lg font-bold mb-2">
               Утилиты и Платформы
             </h3>
-            <p className="text-sm ml-7">
+            <p className="text-sm">
               Вспомогательные инструменты для работы с AI - транскрибация,
               озвучка, веб-публикация.
             </p>
@@ -106,11 +111,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
             ${darkMode ? 'bg-amber-900 bg-opacity-30 hover:bg-opacity-40' : 'bg-amber-50 hover:bg-amber-100'}
           `}
           >
-            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-              <Lightbulb size={20} className="text-amber-500" />
+            <div className="mb-2">
+              <Lightbulb size={24} className="text-amber-500" />
+            </div>
+            <h3 className="text-lg font-bold mb-2">
               Концепты и Техники
             </h3>
-            <p className="text-sm ml-7">
+            <p className="text-sm">
               Базовые понятия и техники для эффективной работы с AI - системные
               промпты, RAG и другие.
             </p>
@@ -120,7 +127,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
 
       <div
         className={`
-        w-full max-w-3xl p-6 rounded-xl
+        w-full max-w-3xl p-6 rounded-xl mt-12
         ${
           darkMode
             ? 'bg-gray-800 border border-gray-700'
@@ -138,13 +145,16 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
               p-4 rounded-lg transition-transform duration-200 hover:scale-105
               ${
                 darkMode
-                  ? 'bg-gray-700 hover:bg-gray-600'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-gray-750 hover:bg-gray-700'
+                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
               }
             `}
           >
-            <h3 className="font-bold">Урок 1</h3>
-            <p className="text-sm">Текстовые модели и промпты</p>
+            <h3 className="font-bold flex items-center gap-2">
+              <PlayCircle size={18} />
+              Урок 1
+            </h3>
+            <p className="text-sm ml-7">Текстовые модели и промпты</p>
           </a>
 
           <a
@@ -155,13 +165,16 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
               p-4 rounded-lg transition-transform duration-200 hover:scale-105
               ${
                 darkMode
-                  ? 'bg-gray-700 hover:bg-gray-600'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-gray-750 hover:bg-gray-700'
+                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
               }
             `}
           >
-            <h3 className="font-bold">Урок 2</h3>
-            <p className="text-sm">Визуальные модели и генерация</p>
+            <h3 className="font-bold flex items-center gap-2">
+              <PlayCircle size={18} />
+              Урок 2
+            </h3>
+            <p className="text-sm ml-7">Визуальные модели и генерация</p>
           </a>
 
           <a
@@ -172,13 +185,16 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ darkMode, setActiveSectio
               p-4 rounded-lg transition-transform duration-200 hover:scale-105
               ${
                 darkMode
-                  ? 'bg-gray-700 hover:bg-gray-600'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-gray-750 hover:bg-gray-700'
+                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
               }
             `}
           >
-            <h3 className="font-bold">Урок 3</h3>
-            <p className="text-sm">Продвинутые техники и автоматизация</p>
+            <h3 className="font-bold flex items-center gap-2">
+              <PlayCircle size={18} />
+              Урок 3
+            </h3>
+            <p className="text-sm ml-7">Продвинутые техники и автоматизация</p>
           </a>
         </div>
       </div>
