@@ -117,17 +117,7 @@ function App() {
 
       {/* Footer */}
       <footer className={`py-4 px-6 text-center text-sm ${darkMode ? 'bg-gray-800 text-gray-400' : 'bg-white text-gray-600'}`}>
-        <p>© 2025 AIMasters by Сергей Шима . Это твой карманный справочник по нейронкам. Пользуйся, внедряй и становись круче!</p>
-        <p className="mt-2">
-          <a 
-            href="https://tdigroup.uz" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className={`hover:underline ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}
-          >
-            tdigroup.uz
-          </a>
-        </p>
+        <p>© 2025 AIMasters by Сергей Шима • Это твой карманный справочник по нейронкам • Пользуйся, внедряй и становись круче! • <a href="https://tdigroup.uz" target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>tdigroup.uz</a></p>
       </footer>
     </div>
   );
